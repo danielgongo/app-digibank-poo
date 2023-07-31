@@ -43,7 +43,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Classes\Banco.cs" />
+    <Compile Include="Classes\Conta.cs" />
+    <Compile Include="Classes\ContaCorrente.cs" />
     <Compile Include="Classes\Layout.cs" />
+    <Compile Include="Classes\Pessoa.cs" />
     <Compile Include="Contratos\Iconta.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

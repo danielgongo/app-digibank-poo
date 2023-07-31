@@ -1,0 +1,8 @@
+C:\Users\dan_l\source\repos\Curso_C#\DigiBank\DigiBank\bin\Debug\DigiBank.exe.config
+C:\Users\dan_l\source\repos\Curso_C#\DigiBank\DigiBank\bin\Debug\DigiBank.exe
+C:\Users\dan_l\source\repos\Curso_C#\DigiBank\DigiBank\bin\Debug\DigiBank.pdb
+C:\Users\dan_l\source\repos\Curso_C#\DigiBank\DigiBank\obj\Debug\DigiBank.csproj.AssemblyReference.cache
+C:\Users\dan_l\source\repos\Curso_C#\DigiBank\DigiBank\obj\Debug\DigiBank.csproj.SuggestedBindingRedirects.cache
+C:\Users\dan_l\source\repos\Curso_C#\DigiBank\DigiBank\obj\Debug\DigiBank.csproj.CoreCompileInputs.cache
+C:\Users\dan_l\source\repos\Curso_C#\DigiBank\DigiBank\obj\Debug\DigiBank.exe
+C:\Users\dan_l\source\repos\Curso_C#\DigiBank\DigiBank\obj\Debug\DigiBank.pdb

@@ -14,6 +14,7 @@ namespace DigiBank.Contratos
         string GetCodigoBanco();
         string GetNumeroAgencia();
         string GetNumeroConta();
+        List<Extrato> Extrato();
 
 
     }

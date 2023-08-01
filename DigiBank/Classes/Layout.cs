@@ -139,8 +139,6 @@ namespace DigiBank.Classes
             Console.WriteLine("                  ::::::::::::::::::::::::::::::::::::                     ");
             Console.WriteLine("                  3 - Consultar Saldo                                        ");
             Console.WriteLine("                  ::::::::::::::::::::::::::::::::::::                     ");
-            Console.WriteLine("                  3 - Consultar Saldo                                        ");
-            Console.WriteLine("                  ::::::::::::::::::::::::::::::::::::                     ");
             Console.WriteLine("                  4 - Extrato                                                    ");
             Console.WriteLine("                  ::::::::::::::::::::::::::::::::::::                     ");
             Console.WriteLine("                  5 - Sair                                                         ");
@@ -150,12 +148,16 @@ namespace DigiBank.Classes
 
             switch(opcao){
                 case 1:
+                    TelaDeposito(pessoa);
                     break;
                 case 2:
+                    TelaSaque(pessoa);
                     break;
                 case 3:
+                    TelaSaldo(pessoa);
                     break;
                 case 4:
+                    TelaExtrato(pessoa);
                     break;
                 case 5:
                     TelaPrincipal();
@@ -166,6 +168,187 @@ namespace DigiBank.Classes
                     Console.WriteLine("                  ::::::::::::::::::::::::::::::::::::                 ");
                     break;
             }
+        }
+
+        public static void TelaDeposito(Pessoa pessoa)
+        {
+            Console.Clear();
+
+            TelaBoasVindas(pessoa);
+
+            Console.WriteLine("                  Digite o valor do depósito:                              ");
+            double valor = double.Parse(Console.ReadLine());
+            Console.WriteLine("                  ::::::::::::::::::::::::::::::::::::                     ");
+
+            pessoa.Conta.Deposita(valor);
+
+            Console.Clear();
+
+            TelaBoasVindas(pessoa);
+
+            Console.WriteLine("                                                                                     ");
+            Console.WriteLine("");
+            Console.WriteLine("                  Depósito realizado com sucesso!                     ");
+            Console.WriteLine("                  ::::::::::::::::::::::::::::::::::::                     ");
+            Console.WriteLine("");
+            Console.WriteLine("");
+
+            OpcaoVoltarLogado(pessoa);
+        }
+
+        public static void TelaSaque(Pessoa pessoa)
+        {
+            Console.Clear();
+
+            TelaBoasVindas(pessoa);
+            Console.WriteLine("                  Digite o valor do saque:                                 ");
+            double valor = double.Parse(Console.ReadLine());
+            Console.WriteLine("                  ::::::::::::::::::::::::::::::::::::                     ");
+
+           bool okSaque = pessoa.Conta.Saca(valor);
+            Console.Clear();
+
+            TelaBoasVindas(pessoa);
+
+            Console.WriteLine("                                                                                     ");
+            Console.WriteLine("");
+
+            
+
+            if (okSaque)
+            {
+                Console.WriteLine("                  Saque realizado com sucesso!                        ");
+                Console.WriteLine("                  ::::::::::::::::::::::::::::::::::::                     ");
+            }
+            else
+            {
+                Console.WriteLine("                  Saldo insuficiente!                                         ");
+                Console.WriteLine("                  ::::::::::::::::::::::::::::::::::::                     ");
+            }
+
+            Console.WriteLine("");
+            Console.WriteLine("");
+
+            Console.Clear();
+
+            Thread.Sleep(300);
+            Console.WriteLine("                  Saque realizado com sucesso!                        ");
+            Console.WriteLine("                  ::::::::::::::::::::::::::::::::::::                     ");
+            Console.WriteLine("                                                                                      ");
+
+            bool sacarNovamente = false;
+
+            do
+            {
+
+                Console.WriteLine("               Deseja realizar um novo saque? \n1 - SIM \n2 - NÃO ");
+                Console.WriteLine("               ::::::::::::::::::::::::::::::::::::                               ");
+                int opcaoNovoSaque = int.Parse(Console.ReadLine());
+                
+
+                if (opcaoNovoSaque == 1)
+                {
+                    sacarNovamente = true;
+                    TelaSaque(pessoa);
+                    Console.WriteLine("           Saque realizado com sucesso!                        ");
+                    Console.WriteLine("           ::::::::::::::::::::::::::::::::::::                     ");
+                    Console.WriteLine("                                                                               ");
+                }
+                else
+                    sacarNovamente = false;
+            } while (sacarNovamente == true);
+
+            Console.Clear();
+
+            OpcaoVoltarLogado(pessoa);
+
+        }
+
+        public static void TelaSaldo(Pessoa pessoa)
+        {
+            Console.Clear();
+            TelaBoasVindas(pessoa);
+
+            Console.WriteLine($"                  Seu saldo é: {pessoa.Conta.ConsultarSaldo()}  ");
+            Console.WriteLine("                    ::::::::::::::::::::::::::::::::::::                      ");
+
+            OpcaoVoltarLogado(pessoa);
+        }
+
+        public static void TelaExtrato(Pessoa pessoa)
+        {
+            Console.Clear();
+            TelaBoasVindas(pessoa);
+
+            if (pessoa.Conta.Extrato().Any())
+            {
+                //Mostrar extrato
+                double total = pessoa.Conta.Extrato().Sum(x => x.Valor);
+
+                foreach (Extrato extrato in pessoa.Conta.Extrato())
+                {
+                    Console.WriteLine("                                                                                                                      ");
+                    Console.WriteLine("                                                                                                                      ");
+                    Console.WriteLine($"                Data e horário: {extrato.Data.ToString("dd/MM/yyyy HH:mm:ss")}    ");
+                    Console.WriteLine($"                Tipo de Movimentação: {extrato.Descricao}                                     ");
+                    Console.WriteLine($"                Valor: {extrato.Valor}                                                                    ");
+                    Console.WriteLine("                  ::::::::::::::::::::::::::::::::::::                                                     ");
+                }
+
+                Console.WriteLine("                                                                                     ");
+                Console.WriteLine("                                                                                     ");
+                Console.WriteLine($"                  SUB TOTAL: {total}                                     ");
+                Console.WriteLine("                  ::::::::::::::::::::::::::::::::::::                     ");
+            }
+            else
+            {
+                Console.WriteLine("                  Não há extrato a ser exibido!!                         ");
+                Console.WriteLine("                  ::::::::::::::::::::::::::::::::::::                     ");
+            }
+            
+
+            OpcaoVoltarLogado(pessoa);
+        }
+
+        private static void OpcaoVoltarLogado(Pessoa pessoa)
+        {
+            Console.WriteLine("                  Escolha uma opção abaixo:                            ");
+            Console.WriteLine("                  ::::::::::::::::::::::::::::::::::::                     ");
+            Console.WriteLine("                  1 - Voltar para minha conta                            ");
+            Console.WriteLine("                  ::::::::::::::::::::::::::::::::::::                     ");
+            Console.WriteLine("                  2 - Sair                                                         ");
+            Console.WriteLine("                  ::::::::::::::::::::::::::::::::::::                     ");
+
+            opcao = int.Parse(Console.ReadLine());
+
+            if (opcao == 1)
+                TelaContaLogada(pessoa);
+            else
+                TelaPrincipal();
+        }
+
+        public static void OpcaoDeslogado(Pessoa pessoa)
+        {
+            Console.WriteLine("                  Escolha uma opção abaixo:                            ");
+            Console.WriteLine("                  ::::::::::::::::::::::::::::::::::::                     ");
+            Console.WriteLine("                  1 - Voltar para menu principal                         ");
+            Console.WriteLine("                  ::::::::::::::::::::::::::::::::::::                     ");
+            Console.WriteLine("                  2 - Sair e fechar a conta                                 ");
+            Console.WriteLine("                  ::::::::::::::::::::::::::::::::::::                     ");
+
+            opcao = int.Parse(Console.ReadLine());
+
+            if (opcao == 1)
+                TelaPrincipal();
+            
+            else
+            {
+                Console.WriteLine("                   Opção inválida!                                            ");
+                Console.WriteLine("                  ::::::::::::::::::::::::::::::::::::                     ");
+            }
+
+
+
         }
     }
 }

@@ -49,6 +49,7 @@
     <Compile Include="Classes\Layout.cs" />
     <Compile Include="Classes\Pessoa.cs" />
     <Compile Include="Contratos\Iconta.cs" />
+    <Compile Include="Extrato.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
